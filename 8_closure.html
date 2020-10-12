@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    function parent(){//闭包对象
+      //闭包对象的全局作用域
+      var total=1000;//局部的全局变量
+      return function(pay){
+        total=total-pay;
+        console.log(`花了${pay},还剩${total}`);
+      }
+    }
+    var money=parent();//先调用外层函数
+    money(100);//900
+    money=null;
+    var money=parent();//需要再次调用
+    money(100);//900
+
+    console.dir();
+    //again
+
+    var pay=parent();
+    pay(500);
+    total=0;
+    pay(1000);
+    //取号机
+
+    function getnum(){
+      i=0;
+      return function(){
+        console.log(`您取得号为${i}`);
+        i++;
+      }
+    }
+    var num=getnum();
+    num();
+    num();
+  </script>
+</body>
+</html>
